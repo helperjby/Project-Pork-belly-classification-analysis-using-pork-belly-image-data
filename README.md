@@ -10,7 +10,7 @@
 | 팀원 | 장병용 |
 
 ## 프로젝트 소개
-- 데이터: 돼지 700여마리의 통삼겹을 1.5cm 일정한 두께로 잘라 스캔한 3만여장의 이미지와 이미지 속 근육의 넓이를 계산 및 측정한 수치 데이터
+- 데이터: 돼지 700여마리의 통삼겹을 1.5cm 일정한 두께로 잘라 스캔한 1.8만여장의 이미지와 이미지 속 근육의 넓이를 계산 및 측정한 수치 데이터
 ![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/b0b21719-1b36-42da-b5a8-485e6f6f8563)
 - 분석개요:
     - 데이터 분석1: 근육&지방비율 데이터를 활용한 클러스터링 분석
@@ -28,27 +28,68 @@
 |  6 | 모델 선정 및 튜닝          | CNN, vgg16, resnet50 | 장병용                 |
 
 ## 세부과정
-1. 수치형 데이터 형변환 및 정제
+### 1. 수치형 데이터 형변환 및 정제
+1) 전처리 과정(29,903 -> 21,786 row)
+    * 값이 0인 경우 `.` 으로 입력된 케이스 -> `.`을 0으로 변경
+    * 상대 위치 변수 추가: 한 돼지에서 삼겹살 조각이 몇 번쨰 위치인지 반영하는 변수(0~1사이 값)
+    * 전체면적(totalbelly) 근육면적(totalm), 지방면젹(totalf)이 0이거나 음수인 경우 제거
+    * 결측값 제거
 ![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/0138f323-4419-4af1-93f3-8ae1efb73cfc)
-    * 전처리 과정(29,903 -> 21,786 row)
-        * 값이 0인 경우 `.` 으로 입력된 케이스 -> `.`을 0으로 변경
-        * 상대 위치 변수 추가: 한 돼지에서 삼겹살 조각이 몇 번쨰 위치인지 반영하는 변수(0~1사이 값)
-        * 전체면적(totalbelly) 근육면적(totalm), 지방면젹(totalf)이 0이거나 음수인 경우 제거
-        * 결측값 제거
-2. 최종 데이터와 변수
-![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/c9e745b7-8df0-4574-b7a6-58709990bc89)
-3. 수치형 데이터를 활용한 삼겹살 클러스터링 및 검증
-    * 사용 변수: 깊은흉근 면적(deepm), 넓은등근 면적(latissimusm), 몸통피부근 면적(cutaneousm), 배곧은근 면적(rectusm), 배바깥경사근 면적(external), 배속경사근 면적(internalm), 기타면적(etca), 근육 면적(totalm), 지방 면적(totalf)
-    * 데이터 표준화: 각 면적을 전체 면적으로 나눠 삼겹살에서 각 면적의 비율로 사용
-    * 사용 알고리즘: k-means clustering, k-medoids clustering 중 k-menas 선택
-    * 진행 순서: 적절한 군집 개수(k) 탐색(계층적 군집 분석의 덴드로그램과 Elbow Method 사용) → 군집 결과 확인
-![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/c427693e-29ae-412b-9150-a1e22946113a)
-![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/9b083290-ddba-45d1-85a3-b6391c4e505f)
-4. 클러스터링 검증 및 고찰
-![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/a16f8abe-c89c-480d-9355-4aea8b319266)
+### 2. 최종 데이터와 변수
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/05fdb873-00fa-4f13-9f94-38913fc1aae7)
 
-5. 이미지 데이터의 전처리
-6. 
+### 3. 수치형 데이터를 활용한 삼겹살 클러스터링 및 검증
+1) 사용 변수: 깊은흉근 면적(deepm), 넓은등근 면적(latissimusm), 몸통피부근 면적(cutaneousm), 배곧은근 면적(rectusm), 배바깥경사근 면적(external), 배속경사근 면적(internalm), 기타면적(etca), 근육 면적(totalm), 지방 면적(totalf)
+2) 데이터 표준화: 각 면적을 전체 면적으로 나눠 삼겹살에서 각 면적의 비율로 사용
+3) 사용 알고리즘: k-means clustering, k-medoids clustering 중 k-menas 선택
+4)  진행 순서: 적절한 군집 개수(k) 탐색(계층적 군집 분석의 덴드로그램과 Elbow Method 사용) → 군집 결과 확인
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/c427693e-29ae-412b-9150-a1e22946113a)
+
+### 4. 클러스터링 검증 및 고찰
+1) 클러스터링 결과 확인
+    * 2개의 주성분을 통한 2차원 시각화(2개의 주성분 분산의 비율 97.3%)
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/1fa21df2-7789-43d7-b17d-faca5d1ffa86)
+    * 각 변수들의 분포 확인
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/905cfeb9-ca3a-44d6-8ea5-ab4c55109caf)
+    * 군집분석 고찰
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/4e7fd99e-e4c2-4b0f-af26-76316143f409)
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/1d4aafea-d796-4949-a0a0-cad025857a89)
+
+### 5. 이미지 데이터의 전처리
+1) 원본 이미지 18,025개의 이슈
+    * 사업년도에 따라 이미지 파일의 용량 차이 존재
+    * 고기 부위에 따라 부적합한 데이터 존재
+    * 고기 스캔작업 중 휴먼에러가 발생한 케이스 존재
+2) 진행한 전처리 과정
+    * 훈련에 적합하도록 노이즈 제거 = 이미지에서 고기영역만 추출(Skimage)
+    * 부적합한 이미지 제거
+    * 이미지 규격의 통일
+    * Clustering 결과와 이미지의 mapping
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/3efce7fb-0590-4e64-894b-6fc7b37ea07f)
+    * 추출한 이미지에서 에러이미지 검출(Pillow)
+        * 종이를 인식해서 추출하거나
+        * 전체 고기 중 국소부위를 인식한 케이스 존재
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/a5652966-9b53-4a08-9ff9-542314c7c899)
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/588b5f48-0d25-4741-b622-dbf08ed69254)
+
+### 6. 이미지 분류 모델 구축
+1) 총 data set 15,486개
+2) Train data 80%(12,499) / Test data 20% (3,125)
+3) 1차 탐색(컴퓨팅파워 문제로 5,150개의 data로 1차 탐색 진행)
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/2dee1dc1-71cb-4634-be20-0a146ef540a5)
+
+### 7. 모델 선정 및 튜닝
+1) 전체 데이터로 2차 모델 후보군에 대해 input size 120과 150을 비교 
+    * basic_cnn
+    * vgg16
+    * resnet50
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/88c3c79d-2e8b-4b61-af97-b47dc251943f)
+2) 2차 모델평가 요약
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/4a37f78b-6a8e-426c-9d9a-15fbe3425329)
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/d9c6ee0e-e762-4849-a2c9-6ff52beab7d1)
+
+
+
 
 
 ## 빅데이터 분석 리더 집체교육 학습내용
