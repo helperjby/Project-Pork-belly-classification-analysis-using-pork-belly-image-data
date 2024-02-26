@@ -1,4 +1,4 @@
-![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/04a65a28-62a0-4505-a55b-56b890dcb8ab)![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/9f70bdf4-a7a9-4edb-91b6-01715a306a1e)![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/0ec7d94d-5d5d-4bdb-9d7e-7bd92cb8756b)# Project-Pork-belly-classification-analysis-using-pork-belly-image-data
+# Project-Pork-belly-classification-analysis-using-pork-belly-image-data
 2023년 빅데이터 분석리더과정 딥러닝 프로젝트
 
 ## 팀소개
