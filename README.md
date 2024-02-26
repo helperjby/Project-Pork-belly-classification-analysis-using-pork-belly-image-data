@@ -1,4 +1,4 @@
-# Project-Pork-belly-classification-analysis-using-pork-belly-image-data
+![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/04a65a28-62a0-4505-a55b-56b890dcb8ab)![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/9f70bdf4-a7a9-4edb-91b6-01715a306a1e)![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/0ec7d94d-5d5d-4bdb-9d7e-7bd92cb8756b)# Project-Pork-belly-classification-analysis-using-pork-belly-image-data
 2023년 빅데이터 분석리더과정 딥러닝 프로젝트
 
 ## 팀소개
@@ -88,9 +88,24 @@
 ![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/4a37f78b-6a8e-426c-9d9a-15fbe3425329)
 ![image](https://github.com/helperjby/Project-Pork-belly-classification-model-using-pork-belly-image-data/assets/69462995/d9c6ee0e-e762-4849-a2c9-6ff52beab7d1)
 
+### 8. 결론 및 반성
+1) 결론
+    1) 통삼겹살의 조각별 이미지 데이터에서 계산된 각 근육넓이 데이터로 삼겹살의 군집분석을 실시한 결과정부에서 추진하고 있는 웰빙삼겹, 풍미삼겹, 꽃삼겹 3개로 나누어 지되, 지방과 근육이 적절한 그룹이 하나 더 생김. (풍미형 꽃삼겹이라 가칭함)
+    2) 신기하게도 각 클러스터는 해부학적으로 비슷한 위치들에 몰려있어 삼겹살 가장 윗부분(목살쪽)인 꽃삼겹, 삼겹살의 가장 끝부분(뒷다리부분)인 웰빙삼겹, 가운데부분인 풍미삼겹으로 나누어지는것을 확인
+    3) 그럼에도 불구하고, 전신이 살코기인 웰빙형, 반대로 지방이 많은 풍미형 돼지도 있는 것으로 보임
+    4) 클러스터 정보를 활용해 이미지정보로 “풍미/풍미형 꽃/꽃/웰빙” 삼겹 여부를 예측하는 모델링을 했고,Test Accuracy 기준 성능 0.74가량으로 출력됨
+    5) 성능을 향상시키기 위해서는 앞서 언급한 ‘전신 풍미형 삼겹, 전신 웰빙형 삼겹’ 돼지를 제거해 표준형에 가까운 돼지들로 분석을 하면 좋은 결과가 예상되나, 아쉽게도 시간이 부족해 추가분석을 하지 못함
+    6) 학술적으로 다가가기 위해서는 1.5cm 두께로 잘라진 이미지들을 척추단위로 표준화가 필요
+
+2) 반성
+    1) 프로젝트 주제가 이미지 관련이었으나 컴퓨팅 파워가 너무 제한적인 상황이라 다양한 모델 및 파라미터 튜닝을 시도할 수 없었던 점이 아쉬웠음
+    2) 3가지 기본 모델에 2가지 input size로 variation을 주는 정도로도 시간이 빠듯해 모델 성능을 0.62정도에서 만족해야 했음
+    3) 삼겹살 이미지 특성상 특정 사물의 이미지 분류와 다르게 이미지 색상 변화가 매우 디테일해서 분류 분석에 어려움이 있음
+    4) 특징을 분석하는 컨볼루션 레이어와 은닉층을 재설계하여 모델링해보면 좋을 것 같음
 
 
-
+</br>
+</br>
 
 ## 빅데이터 분석 리더 집체교육 학습내용
 - **1일차: 빅데이터 비즈니스 전략 및 사례**
